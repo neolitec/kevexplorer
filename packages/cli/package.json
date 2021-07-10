@@ -1,0 +1,26 @@
+{
+  "name": "@kevexplorer/cli",
+  "version": "0.1.0",
+  "description": "KevExplorer CLI",
+  "main": "dist/index.js",
+  "bin": {
+    "kevexplorer": "./bin/cli.js"
+  },
+  "author": "Kevin Manson",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint src --ext ts",
+    "dev": "nodemon",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@kevexplorer/core": "*",
+    "chalk": "^4.1.1",
+    "cli-table": "^0.3.6"
+  },
+  "devDependencies": {
+    "@types/cli-table": "^0.3.0",
+    "nodemon": "^2.0.12"
+  }
+}

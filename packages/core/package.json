@@ -1,0 +1,14 @@
+{
+  "name": "@kevexplorer/core",
+  "version": "0.1.0",
+  "description": "KevExplorer core features",
+  "main": "dist/index.js",
+  "types": "dist/",
+  "author": "Kevin Manson",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint src --ext ts",
+    "build": "tsc",
+    "dev": "nodemon"
+  }
+}

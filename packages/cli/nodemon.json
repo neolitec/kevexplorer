@@ -1,0 +1,7 @@
+{
+    "watch": ["src"],
+    "ignore": ["src/**/*.test.ts", "**/*.d.ts"],
+    "ext": "ts",
+    "exec": "etsc && node ./bin/cli.js",
+    "legacyWatch": true
+  }
