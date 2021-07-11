@@ -17,7 +17,7 @@ Just run:
 
 ## Run the CLI
 
-    yarn cli dev
+    yarn cli
 
 ## Run the app
 
@@ -29,7 +29,7 @@ With Docker:
 
 In development mode:
 
-    yarn api dev
+    yarn api
 
 The backend listens on http://localhost:8080.
 
@@ -37,7 +37,8 @@ A GraphiQL UI is available here: http://localhost:8080/graphiql
 
 ### Start the Web app
 
-    yarn web dev
+    yarn app
+    
 ## TODO
 
 - [ ] Fix ESLint

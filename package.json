@@ -10,10 +10,9 @@
     "build": "lerna run --scope @kevexplorer/* --stream build",
     "lint": "lerna run --scope @kevexplorer/* --stream lint",
     "cli:install": "lerna exec --scope @kevexplorer/cli 'yarn link'",
-    "cli": "lerna run --scope '@kevexplorer/cli' --stream",
-    "core": "lerna run --scope '@kevexplorer/core' --stream",
-    "api": "lerna run --scope '@kevexplorer/api' --stream",
-    "web": "lerna run --scope '@kevexplorer/web' --stream"
+    "cli": "bash -c '(cd packages/cli && yarn dev)'",
+    "api": "lerna run --scope '@kevexplorer/api' --stream dev",
+    "app": "bash -c '(cd packages/app && yarn dev)'"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",

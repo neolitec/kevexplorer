@@ -61,7 +61,7 @@ app.listen(
   },
   (err, address) => {
     if (err) {
-      app.log.error(err);
+      console.error(err);
       process.exit(1);
     }
     console.log(`Server listening on address ${address}`);
