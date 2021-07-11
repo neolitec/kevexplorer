@@ -1,7 +1,0 @@
-{
-    "watch": ["src"],
-    "ignore": ["src/**/*.test.ts"],
-    "ext": "ts",
-    "exec": "tsc",
-    "legacyWatch": true
-  }

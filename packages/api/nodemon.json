@@ -1,0 +1,12 @@
+{
+  "watch": [
+    "src"
+  ],
+  "ignore": [
+    "src/**/*.spec.ts",
+    "**/*.d.ts"
+  ],
+  "ext": "ts",
+  "exec": "etsc && node ./dist/index.js",
+  "legacyWatch": true
+}

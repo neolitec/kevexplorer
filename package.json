@@ -5,15 +5,21 @@
     "packages/*"
   ],
   "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "install": "yarn build && yarn cli:install",
     "build": "lerna run --scope @kevexplorer/* --stream build",
     "lint": "lerna run --scope @kevexplorer/* --stream lint",
     "cli:install": "lerna exec --scope @kevexplorer/cli 'yarn link'",
-    "cli": "lerna run --scope '@kevexplorer/{cli,core}' --parallel --stream dev"
+    "cli": "lerna run --scope '@kevexplorer/cli' --stream",
+    "core": "lerna run --scope '@kevexplorer/core' --stream",
+    "api": "lerna run --scope '@kevexplorer/api' --stream",
+    "web": "lerna run --scope '@kevexplorer/web' --stream"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1",
+    "concurrently": "^6.2.0",
     "esbuild": "^0.11.18",
     "esbuild-node-tsc": "^1.4.2",
     "eslint": "^7.2.0",

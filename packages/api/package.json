@@ -1,0 +1,25 @@
+{
+  "name": "@kevexplorer/api",
+  "version": "0.1.0",
+  "description": "KevExplorer API",
+  "main": "dist/index.js",
+  "author": "Kevin Manson",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint src --ext ts",
+    "dev": "nodemon",
+    "build": "tsc",
+    "build:dev": "etsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@kevexplorer/core": "*",
+    "fastify": "^3.19.0",
+    "mercurius": "^8.0.0",
+    "mercurius-codegen": "^1.7.0"
+  },
+  "devDependencies": {
+    "eslint-plugin-graphql": "^4.0.0",
+    "nodemon": "^2.0.12"
+  }
+}
