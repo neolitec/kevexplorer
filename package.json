@@ -6,6 +6,7 @@
   ],
   "scripts": {
     "build": "lerna run --scope @kevexplorer/* --stream build",
+    "lint": "lerna run --scope @kevexplorer/* --stream lint",
     "cli:install": "lerna exec --scope @kevexplorer/cli 'yarn link'",
     "cli": "lerna run --scope '@kevexplorer/{cli,core}' --parallel --stream dev"
   },

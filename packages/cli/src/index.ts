@@ -7,7 +7,7 @@ import { CLIContext } from './model';
 
 const fsp = fs.promises;
 
-const initialPath = process.cwd()
+const initialPath = process.cwd();
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -35,7 +35,7 @@ const context: CLIContext = {
   parentFolder() {
     this.path = path.dirname(this.path);
     setPromptPath(this.path);
-  }
+  },
 };
 
 printAbout();

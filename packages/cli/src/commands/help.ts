@@ -2,7 +2,7 @@ import { ICommand } from '../model';
 
 export default {
   name: 'help',
-  run(_) {
+  run() {
     console.log(`
   Commands:
     help \t\t this help

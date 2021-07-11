@@ -1,5 +1,5 @@
-import { CommandParams } from "../model";
-import clear from "./clear";
+import { CommandParams } from '../model';
+import clear from './clear';
 
 describe('Clear command', () => {
   let clearSpy: jest.SpyInstance;
@@ -7,10 +7,10 @@ describe('Clear command', () => {
 
   beforeEach(() => {
     clearSpy = jest.spyOn(global.console, 'clear');
-  })
+  });
 
   it('should clear the console', () => {
     clear.run(params);
     expect(clearSpy).toHaveBeenCalledTimes(1);
-  })
-})
+  });
+});

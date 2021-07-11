@@ -1,7 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "eslint.packageManager": "yarn",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "npm.packageManager": "yarn",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.organizeImports": true

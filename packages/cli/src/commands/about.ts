@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import pkg from '../../package.json';
-import { ICommand } from "../model";
+import { ICommand } from '../model';
 
 export function printAbout() {
   console.log(`${chalk.keyword('orange')(`
@@ -14,12 +14,12 @@ export function printAbout() {
                              |_|`)} v${pkg.version}
   
   Type 'help' to start.
-`)
+`);
 }
 
 export default {
   name: 'about',
   run() {
     printAbout();
-  }
+  },
 } as ICommand;

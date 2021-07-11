@@ -1,4 +1,4 @@
-import { ICommand } from "../model";
+import { ICommand } from '../model';
 
 export default {
   name: 'cd',
@@ -9,5 +9,5 @@ export default {
     } else if (folder.length) {
       await context.enterFolder(folder);
     }
-  }
+  },
 } as ICommand;
