@@ -12,4 +12,8 @@ describe(prettySize, () => {
   it('should round with two decimal', () => {
     expect(prettySize(1234)).toEqual('1.23 kB');
   });
+
+  it('should convert null size', () => {
+    expect(prettySize(0)).toEqual('0 B');
+  });
 });

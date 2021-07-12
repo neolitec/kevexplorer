@@ -9,5 +9,11 @@
   "scripts": {
     "lint": "eslint src --ext ts",
     "build": "tsc"
+  },
+  "dependencies": {
+    "bluebird": "^3.7.2"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.36"
   }
 }

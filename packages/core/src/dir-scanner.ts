@@ -1,7 +1,15 @@
+import Promise from 'bluebird';
 import fs from 'fs';
 import path from 'path';
 
 const fsp = fs.promises;
+
+const ignoredErrors = [
+  // triggered when the item is a symlink
+  'ENOENT',
+  // triggered when there's an access issue
+  'EACCESS',
+];
 
 export enum FileType {
   FILE = 'FILE',
@@ -68,35 +76,55 @@ export const getDirContent = async (dir: string) => {
   const files = await fsp.readdir(dir);
   const dirContent: FileMeta[] = [];
 
-  await Promise.all(
-    files.map(async (file) => {
+  await Promise.map(
+    files,
+    async (file) => {
       const filePath = path.resolve(dir, file);
-      const stat = await fsp.stat(filePath);
-      const fileMeta: FileMeta = {
-        fileName: file,
-        path: filePath,
-        size: stat.size,
-        type: FileType.FILE,
-        lastModified: stat.mtime,
-      };
-
-      if (stat.isDirectory()) {
-        fileMeta.children = await getDirContent(filePath);
-        const lastModifiedInfo = getLastModifiedInfo(fileMeta.children);
-        fileMeta.type = FileType.DIR;
-        fileMeta.files = countByType(fileMeta.children, FileType.FILE);
-        fileMeta.folders = countByType(fileMeta.children, FileType.DIR);
-        fileMeta.lastModified = lastModifiedInfo.lastModified;
-        fileMeta.lastModifiedFile = lastModifiedInfo.lastModifiedFile;
-        fileMeta.size = getTotalCumulativeSize(fileMeta.children);
-        fileMeta.cumul = {
-          files: countByTypeCumul(fileMeta.children, FileType.FILE),
-          folders: countByTypeCumul(fileMeta.children, FileType.DIR),
+      try {
+        const stat = await fsp.stat(filePath, {});
+        const fileMeta: FileMeta = {
+          fileName: file,
+          path: filePath,
+          size: stat.size,
+          type: FileType.FILE,
+          lastModified: stat.mtime,
         };
-      }
 
-      dirContent.push(fileMeta);
-    }),
+        if (stat.isDirectory()) {
+          fileMeta.children = await getDirContent(filePath);
+          const lastModifiedInfo = getLastModifiedInfo(fileMeta.children);
+          fileMeta.type = FileType.DIR;
+          fileMeta.files = countByType(fileMeta.children, FileType.FILE);
+          fileMeta.folders = countByType(fileMeta.children, FileType.DIR);
+          fileMeta.lastModified = lastModifiedInfo.lastModified;
+          fileMeta.lastModifiedFile = lastModifiedInfo.lastModifiedFile;
+          fileMeta.size = getTotalCumulativeSize(fileMeta.children);
+          fileMeta.cumul = {
+            files: countByTypeCumul(fileMeta.children, FileType.FILE),
+            folders: countByTypeCumul(fileMeta.children, FileType.DIR),
+          };
+        }
+
+        dirContent.push(fileMeta);
+      } catch (err) {
+        if (ignoredErrors.includes(err.code)) {
+          dirContent.push({
+            fileName: file,
+            path: filePath,
+            size: 0,
+            lastModified: new Date(0),
+            type: FileType.FILE,
+          });
+        } else {
+          console.log(`An unexpected error occurred while reading ${filePath}`);
+          console.log(err);
+        }
+      }
+    },
+    {
+      // Better than Infinity but not ideal.
+      concurrency: 4,
+    },
   );
 
   return [...dirContent].sort((a, b) => b.size - a.size);

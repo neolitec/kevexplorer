@@ -7,6 +7,7 @@ import { ICommand } from '../model';
 export default {
   name: 'ls',
   async run({ context }) {
+    console.time('Processed');
     const list = await scanDir(context.path);
 
     const table = buildTable();
@@ -19,6 +20,8 @@ Total size: ${prettySize(list.size)}
 Files count: ${list.filesCount}
 Folders count: ${list.foldersCount}`,
     );
+    console.log();
+    console.timeEnd('Processed');
   },
 } as ICommand;
 

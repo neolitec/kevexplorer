@@ -61,6 +61,7 @@ You can also get into a specific package and run the same command.
 - [ ] Better responsive
 - [ ] Navigation history
 - [ ] Caching folders content
+- [ ] Authentication
 
 ### Backend (including the file scanner)
 
@@ -70,9 +71,7 @@ You can also get into a specific package and run the same command.
 
 More about the scanner:
 
-- [ ] [BUG] Handle the rights - sometimes you don't have a granted access to files, making the scanner crash
-- [ ] [PERF] Limit the concurrency
-- [ ] [PERF] Improve the memory footprint by limiting the depth of the tree in the memory
+- [ ] [PERF] Better concurrency management. Currently, the limit of concurrency is 4... for each scanned folder. We could get a better management by using node Workers and push jobs into a pool that can provide a global limitation for those parallel tasks.
 - [ ] [SECURITY] Give a folder as a root path (a jail) from which the user can't get out
 
 ### CLI
