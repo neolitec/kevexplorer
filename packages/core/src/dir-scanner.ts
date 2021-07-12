@@ -106,6 +106,7 @@ export const scanDir = async (dir: string) => {
   const dirContent = await getDirContent(dir);
 
   return {
+    path: path.resolve(dir),
     children: dirContent,
     size: getTotalCumulativeSize(dirContent),
     foldersCount: countByTypeCumul(dirContent, FileType.DIR),

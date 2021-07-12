@@ -13,4 +13,6 @@ ADD packages/api/dist /app/packages/api/dist/
 
 EXPOSE 8080
 
+ENV NODE_OPTIONS="--max-old-space-size=8192"
+
 CMD [ "node", "./packages/api/dist/index.js" ]

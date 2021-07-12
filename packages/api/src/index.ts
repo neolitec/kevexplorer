@@ -1,10 +1,12 @@
-import { scanDir } from '@kevexplorer/core';
+import { FileType, scanDir } from '@kevexplorer/core';
 import Fastify, { FastifyRequest } from 'fastify';
+import FastifyCors from 'fastify-cors';
 import mercurius, { IFieldResolver, IResolvers, MercuriusContext } from 'mercurius';
 import { gql } from 'mercurius-codegen';
 import { AuthorizationContext } from './model';
 
 const app = Fastify();
+app.register(FastifyCors, {});
 
 const buildContext = async (req: FastifyRequest) => ({
   authorization: req.headers.authorization,
@@ -14,9 +16,15 @@ const schema = gql`
   type File {
     path: String!
     name: String!
+    size: Int!
+    lastModifiedDate: String!
+    filesCount: Int
+    foldersCount: Int
+    isDir: Boolean!
   }
 
   type ListResponse {
+    path: String!
     files: [File]!
     filesCount: Int!
     foldersCount: Int!
@@ -24,16 +32,22 @@ const schema = gql`
   }
 
   type Query {
-    list(path: String!): ListResponse!
+    list(path: String): ListResponse!
   }
 `;
 
-const list: IFieldResolver<unknown, MercuriusContext, { path: string }> = async (root, args, ctx) => {
-  const result = await scanDir(args.path);
+const list: IFieldResolver<unknown, MercuriusContext, { path: string | null }> = async (root, args, ctx) => {
+  const result = await scanDir(args.path ?? process.cwd());
   return {
+    path: result.path,
     files: result.children.map((file) => ({
       path: file.path,
       name: file.fileName,
+      size: file.size,
+      lastModifiedDate: file.lastModified.toISOString(),
+      ...(file.cumul ? { filesCount: file.cumul?.files } : {}),
+      ...(file.cumul ? { folderssCount: file.cumul?.folders } : {}),
+      isDir: file.type === FileType.DIR,
     })),
     filesCount: result.filesCount,
     foldersCount: result.foldersCount,
