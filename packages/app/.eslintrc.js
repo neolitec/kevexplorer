@@ -9,9 +9,13 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': ['error'],
+
+    'import/prefer-default-export': 'off',
     'no-console': 'off',
     'no-shadow': 'off',
     'no-use-before-define': 'off',
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.ts'] }],
+    'react/prop-types': 'off',
 
     '@typescript-eslint/explicit-module-boundary-types': 'off',
 

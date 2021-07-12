@@ -8,7 +8,7 @@ function App() {
     <UrqlProvider value={client}>
       <Explorer />
     </UrqlProvider>
-  )
+  );
 }
 
-export default App
+export default App;

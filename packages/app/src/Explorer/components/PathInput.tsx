@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react';
-import styled from "styled-components";
+import styled from 'styled-components';
 import { CornerDownLeft } from '../../icons/CornerDownLeft';
 
 export interface PathInputProps {
@@ -11,14 +11,14 @@ export interface PathInputProps {
 const Input = styled.input`
   flex: 1;
   border: 1px orange solid;
-  border-radius: 4px; 
+  border-radius: 4px;
   font-size: 1.4em;
   padding: 0.5em 0.8em;
   color: #555;
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 4px rgba(255,166,0,0.5);
+    box-shadow: 0 0 0 4px rgba(255, 166, 0, 0.5);
   }
 
   &:disabled {
@@ -49,22 +49,24 @@ export const PathInput: React.FC<PathInputProps> = ({ disabled, onChange, path }
   const onChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
     event.preventDefault();
     setValue(event.target.value);
-  }
+  };
 
   const onSubmitHandler: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     onChange(value);
-  }
+  };
 
   useEffect(() => {
     console.log({ path });
     setValue(path ?? '');
   }, [path]);
 
-  return <FormContainer onSubmit={onSubmitHandler} role="search">
-    <Input value={value} onChange={onChangeHandler} disabled={disabled} placeholder="Path to the folder" />
-    <SubmitButton disabled={disabled} type="submit">
-      <SubmitIcon />
-    </SubmitButton>
-  </FormContainer >
-}
+  return (
+    <FormContainer onSubmit={onSubmitHandler} role="search">
+      <Input value={value} onChange={onChangeHandler} disabled={disabled} placeholder="Path to the folder" />
+      <SubmitButton disabled={disabled} type="submit">
+        <SubmitIcon />
+      </SubmitButton>
+    </FormContainer>
+  );
+};

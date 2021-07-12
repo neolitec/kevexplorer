@@ -1,4 +1,3 @@
-
 export interface File {
   name: string;
   path: string;
@@ -16,5 +15,5 @@ export interface ListResponse {
     filesCount: number;
     foldersCount: number;
     size: number;
-  }
+  };
 }

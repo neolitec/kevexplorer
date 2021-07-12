@@ -1,3 +1,3 @@
 export function getFolder(path: string) {
-  return path.replace(/[^\/]+$/, '');
+  return path.replace(/[^/]+$/, '');
 }

@@ -20,24 +20,24 @@ const ListQuery = `
       size
     }
   }
-`
+`;
 
 export const usePath = () => {
   const [path, setPath] = useState<string | null>(null);
 
   const [result, reexecute] = useQuery<ListResponse>({
     query: ListQuery,
-    variables: { path }
-  })
+    variables: { path },
+  });
 
   useEffect(() => {
     reexecute();
-  }, [path]);
+  }, [path, reexecute]);
 
   return {
     loading: result.fetching,
     data: result.data?.list,
     setPath,
-    path
-  }
-}
+    path,
+  };
+};

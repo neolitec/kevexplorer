@@ -16,7 +16,12 @@ const Row = styled.div`
   padding: 0 20px;
   height: 48px;
   align-items: center;
-  ${(p: RowProps) => p.isDir ? css`cursor: pointer;` : ''}
+  ${(p: RowProps) =>
+    p.isDir
+      ? css`
+          cursor: pointer;
+        `
+      : ''}
 
   &:hover {
     background-color: #ccc;
@@ -41,24 +46,26 @@ const CellFlex = styled.div`
   flex: 1;
 `;
 
-export const ParentFolderRow: React.FC<{ onClick: () => void }> = ({ onClick }) => {
-  return <Row role="listitem" isDir={true} onClick={onClick}>
-    <CellIcon></CellIcon>
+export const ParentFolderRow: React.FC<{ onClick: () => void }> = ({ onClick }) => (
+  <Row role="listitem" isDir onClick={onClick}>
+    <CellIcon />
     <CellFlex>..</CellFlex>
   </Row>
-}
+);
 
 export const FileRow: React.FC<FileRowProps> = ({ file, onClick }) => {
   const onClickHandler = useCallback(() => {
     onClick(file);
-  }, [onClick])
+  }, [file, onClick]);
 
-  return <Row role="listitem" isDir={file.isDir} onClick={file.isDir ? onClickHandler : undefined}>
-    <CellIcon>{file.isDir ? <FolderIcon /> : <FileIcon />}</CellIcon>
-    <CellFlex>{file.name}</CellFlex>
-    <CellMedium>{format(new Date(file.lastModifiedDate), 'yyyy/MM/dd HH:mm:ss')}</CellMedium>
-    <CellSmall>{file.size}</CellSmall>
-    <CellSmall>{file.filesCount}</CellSmall>
-    <CellSmall>{file.foldersCount}</CellSmall>
-  </Row>
-}
+  return (
+    <Row role="listitem" isDir={file.isDir} onClick={file.isDir ? onClickHandler : undefined}>
+      <CellIcon>{file.isDir ? <FolderIcon /> : <FileIcon />}</CellIcon>
+      <CellFlex>{file.name}</CellFlex>
+      <CellMedium>{format(new Date(file.lastModifiedDate), 'yyyy/MM/dd HH:mm:ss')}</CellMedium>
+      <CellSmall>{file.size}</CellSmall>
+      <CellSmall>{file.filesCount}</CellSmall>
+      <CellSmall>{file.foldersCount}</CellSmall>
+    </Row>
+  );
+};

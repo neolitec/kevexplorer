@@ -16,12 +16,13 @@ const Container = styled.div`
 export const Viewport: React.FC<ViewportProps> = ({ children }) => {
   const windowSize = useWindowSize();
 
-  const styles = useMemo(() => ({
-    height: `${windowSize.height}px`,
-    width: `${windowSize.width}px`,
-  }), [windowSize]);
-
-  return (
-    <Container style={styles}>{children}</Container>
+  const styles = useMemo(
+    () => ({
+      height: `${windowSize.height}px`,
+      width: `${windowSize.width}px`,
+    }),
+    [windowSize],
   );
-}
+
+  return <Container style={styles}>{children}</Container>;
+};
