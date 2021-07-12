@@ -8,7 +8,8 @@ const ignoredErrors = [
   // triggered when the item is a symlink
   'ENOENT',
   // triggered when there's an access issue
-  'EACCESS',
+  'EACCES',
+  'EPERM',
 ];
 
 export enum FileType {
