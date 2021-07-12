@@ -25,7 +25,11 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/__tests__/*.ts', '**/*.spec.ts'],
+      files: ['**/__tests__/*.ts*', '**/*.spec.ts*'],
+      rules: {
+        'import/no-extraneous-dependencies': 'off',
+        'react/jsx-props-no-spreading': 'off',
+      },
       env: {
         jest: true,
       },

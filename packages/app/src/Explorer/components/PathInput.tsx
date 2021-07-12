@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { CornerDownLeft } from '../../icons/CornerDownLeft';
+import { CornerDownLeftIcon } from '../../icons/CornerDownLeftIcon';
 
 export interface PathInputProps {
   disabled?: boolean;
@@ -36,7 +36,7 @@ const SubmitButton = styled.button`
   }
 `;
 
-const SubmitIcon = styled(CornerDownLeft).attrs({ color: 'orange' })``;
+const SubmitIcon = styled(CornerDownLeftIcon).attrs({ color: 'orange' })``;
 
 const FormContainer = styled.form`
   display: flex;
@@ -57,7 +57,6 @@ export const PathInput: React.FC<PathInputProps> = ({ disabled, onChange, path }
   };
 
   useEffect(() => {
-    console.log({ path });
     setValue(path ?? '');
   }, [path]);
 

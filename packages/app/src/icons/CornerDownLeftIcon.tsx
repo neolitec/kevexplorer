@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconProps } from './icon';
 
-export const CornerDownLeft: React.FC<IconProps> = ({ color }) => (
+export const CornerDownLeftIcon: React.FC<IconProps> = ({ color }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"

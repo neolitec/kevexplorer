@@ -4,13 +4,14 @@ import styled, { css } from 'styled-components';
 import { FileIcon } from '../../../icons/FileIcon';
 import { FolderIcon } from '../../../icons/FolderIcon';
 import { File } from '../../model';
+import { prettySize } from './utils';
 
 export interface FileRowProps {
   file: File;
-  onClick: (file: File) => void;
+  onClick?: (file: File) => void;
 }
 
-type RowProps = { isDir: boolean };
+type RowProps = { bordered?: boolean; header?: boolean; isDir: boolean };
 const Row = styled.div`
   display: flex;
   padding: 0 20px;
@@ -20,6 +21,18 @@ const Row = styled.div`
     p.isDir
       ? css`
           cursor: pointer;
+        `
+      : ''}
+  ${(p: RowProps) =>
+    p.bordered
+      ? css`
+          border-bottom: 1px #ddd solid;
+        `
+      : ''}
+  ${(p: RowProps) =>
+    p.bordered
+      ? css`
+          font-weight: 100;
         `
       : ''}
 
@@ -33,18 +46,39 @@ const CellIcon = styled.div`
 `;
 
 const CellSmall = styled.div`
-  width: 10%;
-  max-width: 100px;
+  width: 15%;
+  max-width: 120px;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
 `;
 
 const CellMedium = styled.div`
   width: 30%;
   max-width: 200px;
+
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
 `;
 
 const CellFlex = styled.div`
   flex: 1;
 `;
+
+export const HeaderRow: React.FC = () => (
+  <Row role="listitem" isDir bordered header>
+    <CellIcon />
+    <CellFlex>Filename</CellFlex>
+    <CellMedium>Last updated</CellMedium>
+    <CellSmall>Size</CellSmall>
+    <CellSmall>Files count</CellSmall>
+    <CellSmall>Folders count</CellSmall>
+  </Row>
+);
 
 export const ParentFolderRow: React.FC<{ onClick: () => void }> = ({ onClick }) => (
   <Row role="listitem" isDir onClick={onClick}>
@@ -55,7 +89,7 @@ export const ParentFolderRow: React.FC<{ onClick: () => void }> = ({ onClick }) 
 
 export const FileRow: React.FC<FileRowProps> = ({ file, onClick }) => {
   const onClickHandler = useCallback(() => {
-    onClick(file);
+    onClick?.(file);
   }, [file, onClick]);
 
   return (
@@ -63,7 +97,7 @@ export const FileRow: React.FC<FileRowProps> = ({ file, onClick }) => {
       <CellIcon>{file.isDir ? <FolderIcon /> : <FileIcon />}</CellIcon>
       <CellFlex>{file.name}</CellFlex>
       <CellMedium>{format(new Date(file.lastModifiedDate), 'yyyy/MM/dd HH:mm:ss')}</CellMedium>
-      <CellSmall>{file.size}</CellSmall>
+      <CellSmall>{prettySize(file.size)}</CellSmall>
       <CellSmall>{file.filesCount}</CellSmall>
       <CellSmall>{file.foldersCount}</CellSmall>
     </Row>

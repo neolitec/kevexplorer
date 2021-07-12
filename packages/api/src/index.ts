@@ -46,7 +46,7 @@ const list: IFieldResolver<unknown, MercuriusContext, { path: string | null }> =
       size: file.size,
       lastModifiedDate: file.lastModified.toISOString(),
       ...(file.cumul ? { filesCount: file.cumul?.files } : {}),
-      ...(file.cumul ? { folderssCount: file.cumul?.folders } : {}),
+      ...(file.cumul ? { foldersCount: file.cumul?.folders } : {}),
       isDir: file.type === FileType.DIR,
     })),
     filesCount: result.filesCount,

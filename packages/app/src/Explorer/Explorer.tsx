@@ -34,10 +34,10 @@ export const Explorer: React.FC = () => {
       <Topbar />
       <CenteredContainer>
         <PathInput path={data?.path ?? ''} onChange={onChange} />
-        {loading && <Loading />}
+        {loading && <Loading data-testid="loader" />}
       </CenteredContainer>
       {!loading && (
-        <ListContainer>
+        <ListContainer data-testid="files-list">
           <FilesList files={data?.files ?? []} path={data?.path ?? ''} onFolderClick={setPath} />
         </ListContainer>
       )}

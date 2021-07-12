@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { File } from '../../model';
-import { FileRow, ParentFolderRow } from './FileRow';
+import { FileRow, HeaderRow, ParentFolderRow } from './FileRow';
 import { getFolder } from './utils';
 
 export interface FilesListProps {
@@ -27,9 +27,10 @@ export const FilesList: React.FC<FilesListProps> = ({ files, path, onFolderClick
   return (
     <>
       <List>
+        <HeaderRow />
         <ParentFolderRow onClick={onParentFolderClick} />
         {files.map((file) => (
-          <FileRow file={file} onClick={onFileRowClickHandler} />
+          <FileRow key={file.path} file={file} onClick={onFileRowClickHandler} />
         ))}
       </List>
     </>
