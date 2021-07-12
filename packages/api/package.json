@@ -8,8 +8,7 @@
   "scripts": {
     "lint": "eslint src --ext ts",
     "dev": "nodemon",
-    "build": "tsc",
-    "build:dev": "etsc",
+    "build": "etsc",
     "test": "echo 'No test for the API :('"
   },
   "dependencies": {
