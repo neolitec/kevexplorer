@@ -10,7 +10,7 @@
     "dev": "nodemon",
     "build": "tsc",
     "build:dev": "etsc",
-    "test": "jest"
+    "test": "echo 'No test for the API :('"
   },
   "dependencies": {
     "@kevexplorer/core": "*",

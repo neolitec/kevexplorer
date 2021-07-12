@@ -38,6 +38,14 @@ A GraphiQL UI is available here: http://localhost:8080/graphiql
 ### Start the Web app
 
     yarn app
+
+## Run the tests
+
+All tests can be run with:
+
+    yarn test
+
+You can also get into a specific package and run the same command.
     
 ## TODO
 
@@ -50,6 +58,7 @@ A GraphiQL UI is available here: http://localhost:8080/graphiql
 - [ ] Accessibility refinements
 - [ ] Virtual scroll would be nice for very long lists
 - [ ] i18n
+- [ ] Better responsive
 - [ ] Navigation history
 - [ ] Caching folders content
 
@@ -57,11 +66,11 @@ A GraphiQL UI is available here: http://localhost:8080/graphiql
 
 - [ ] Logs
 - [ ] Environement configuration
-- [ ] e2e tests
+- [ ] E2e tests
 
 More about the scanner:
 
-- [ ] [BUG] Handle the rights - sometimes you don't have a granted access to files so the scanner crashes
+- [ ] [BUG] Handle the rights - sometimes you don't have a granted access to files, making the scanner crash
 - [ ] [PERF] Limit the concurrency
 - [ ] [PERF] Improve the memory footprint by limiting the depth of the tree in the memory
 - [ ] [SECURITY] Give a folder as a root path (a jail) from which the user can't get out

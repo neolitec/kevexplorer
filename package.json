@@ -12,7 +12,8 @@
     "cli:install": "lerna exec --scope @kevexplorer/cli 'yarn link'",
     "cli": "bash -c '(cd packages/cli && yarn dev)'",
     "api": "lerna run --scope '@kevexplorer/api' --stream dev",
-    "app": "bash -c '(cd packages/app && yarn dev)'"
+    "app": "bash -c '(cd packages/app && yarn dev)'",
+    "test": "lerna run --scope @kevexplorer/* --stream test"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",

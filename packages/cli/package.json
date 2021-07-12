@@ -2,7 +2,7 @@
   "name": "@kevexplorer/cli",
   "version": "0.1.0",
   "description": "KevExplorer CLI",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
   "bin": {
     "kevexplorer": "./bin/cli.js"
   },
