@@ -22,7 +22,6 @@ export interface FileMeta {
   path: string;
   size: number;
   type: FileType;
-  children?: FileMeta[];
   folders?: number;
   files?: number;
   lastModified: Date;
@@ -92,17 +91,17 @@ export const getDirContent = async (dir: string) => {
         };
 
         if (stat.isDirectory()) {
-          fileMeta.children = await getDirContent(filePath);
-          const lastModifiedInfo = getLastModifiedInfo(fileMeta.children);
+          const children = await getDirContent(filePath);
+          const lastModifiedInfo = getLastModifiedInfo(children);
           fileMeta.type = FileType.DIR;
-          fileMeta.files = countByType(fileMeta.children, FileType.FILE);
-          fileMeta.folders = countByType(fileMeta.children, FileType.DIR);
+          fileMeta.files = countByType(children, FileType.FILE);
+          fileMeta.folders = countByType(children, FileType.DIR);
           fileMeta.lastModified = lastModifiedInfo.lastModified;
           fileMeta.lastModifiedFile = lastModifiedInfo.lastModifiedFile;
-          fileMeta.size = getTotalCumulativeSize(fileMeta.children);
+          fileMeta.size = getTotalCumulativeSize(children);
           fileMeta.cumul = {
-            files: countByTypeCumul(fileMeta.children, FileType.FILE),
-            folders: countByTypeCumul(fileMeta.children, FileType.DIR),
+            files: countByTypeCumul(children, FileType.FILE),
+            folders: countByTypeCumul(children, FileType.DIR),
           };
         }
 

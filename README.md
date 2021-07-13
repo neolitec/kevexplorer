@@ -74,6 +74,13 @@ More about the scanner:
 - [ ] [PERF] Better concurrency management. Currently, the limit of concurrency is 4... for each scanned folder. We could get a better management by using node Workers and push jobs into a pool that can provide a global limitation for those parallel tasks.
 - [ ] [SECURITY] Give a folder as a root path (a jail) from which the user can't get out
 
+**Known issue**
+
+When the tree of files is too big, we hit a `JavaScript heap out of memory` error.
+If you want run Node with more memory, you can set this environment variable:
+
+    NODE_OPTION='--max-old-space-size=8192'
+
 ### CLI
 
 - [ ] Improve UX by handling autocompletion, history...

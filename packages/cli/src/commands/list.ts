@@ -1,4 +1,4 @@
-import { FileMeta, scanDir } from '@kevexplorer/core';
+import { FileMeta, FileType, scanDir } from '@kevexplorer/core';
 import Table from 'cli-table';
 import path from 'path';
 import prettySize from '../lib/pretty-size';
@@ -27,6 +27,7 @@ Folders count: ${list.foldersCount}`,
 
 function buildLine(file: FileMeta) {
   return [
+    file.type === FileType.DIR ? 'D' : '',
     path.basename(file.fileName),
     prettySize(file.size),
     file.lastModified.toISOString(),
@@ -37,6 +38,6 @@ function buildLine(file: FileMeta) {
 
 function buildTable() {
   return new Table({
-    head: ['Name', 'Size', 'Last modified', 'Files count', 'Folders count'],
+    head: ['', 'Name', 'Size', 'Last modified', 'Files count', 'Folders count'],
   });
 }

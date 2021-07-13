@@ -16,7 +16,7 @@ const schema = gql`
   type File {
     path: String!
     name: String!
-    size: Int!
+    size: String!
     lastModifiedDate: String!
     filesCount: Int
     foldersCount: Int
@@ -28,7 +28,7 @@ const schema = gql`
     files: [File]!
     filesCount: Int!
     foldersCount: Int!
-    size: Int!
+    size: String!
   }
 
   type Query {
