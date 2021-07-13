@@ -11,18 +11,13 @@ export interface FileRowProps {
   onClick?: (file: File) => void;
 }
 
-type RowProps = { bordered?: boolean; header?: boolean; isDir: boolean };
+type RowProps = { bordered?: boolean; onClick?: unknown; header?: boolean };
 const Row = styled.div`
   display: flex;
   padding: 0 20px;
   height: 48px;
   align-items: center;
-  ${(p: RowProps) =>
-    p.isDir
-      ? css`
-          cursor: pointer;
-        `
-      : ''}
+
   ${(p: RowProps) =>
     p.bordered
       ? css`
@@ -36,9 +31,16 @@ const Row = styled.div`
         `
       : ''}
 
-  &:hover {
-    background-color: #ccc;
-  }
+  ${(p: RowProps) =>
+    p.onClick
+      ? css`
+          cursor: pointer;
+
+          &:hover {
+            background-color: #ccc;
+          }
+        `
+      : ''}
 `;
 
 const CellIcon = styled.div`
@@ -70,7 +72,7 @@ const CellFlex = styled.div`
 `;
 
 export const HeaderRow: React.FC = () => (
-  <Row role="listitem" isDir bordered header>
+  <Row role="listitem" bordered header>
     <CellIcon />
     <CellFlex>Filename</CellFlex>
     <CellMedium>Last updated</CellMedium>
@@ -81,7 +83,7 @@ export const HeaderRow: React.FC = () => (
 );
 
 export const ParentFolderRow: React.FC<{ onClick: () => void }> = ({ onClick }) => (
-  <Row role="listitem" isDir onClick={onClick}>
+  <Row role="listitem" onClick={onClick}>
     <CellIcon />
     <CellFlex>..</CellFlex>
   </Row>
@@ -93,7 +95,7 @@ export const FileRow: React.FC<FileRowProps> = ({ file, onClick }) => {
   }, [file, onClick]);
 
   return (
-    <Row role="listitem" isDir={file.isDir} onClick={file.isDir ? onClickHandler : undefined}>
+    <Row role="listitem" onClick={file.isDir ? onClickHandler : undefined}>
       <CellIcon>{file.isDir ? <FolderIcon /> : <FileIcon />}</CellIcon>
       <CellFlex>{file.name}</CellFlex>
       <CellMedium>{format(new Date(file.lastModifiedDate), 'yyyy/MM/dd HH:mm:ss')}</CellMedium>

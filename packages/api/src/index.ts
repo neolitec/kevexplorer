@@ -37,8 +37,9 @@ const schema = gql`
 `;
 
 const list: IFieldResolver<unknown, MercuriusContext, { path: string | null }> = async (root, args, ctx) => {
+  console.log(`Scanning ${args.path}...`);
   const result = await scanDir(args.path ?? process.cwd());
-  return {
+  const response = {
     path: result.path,
     files: result.children.map((file) => ({
       path: file.path,
@@ -53,6 +54,8 @@ const list: IFieldResolver<unknown, MercuriusContext, { path: string | null }> =
     foldersCount: result.foldersCount,
     size: result.size,
   };
+  console.log(`Successfully scanned ${args.path}!`);
+  return response;
 };
 
 const resolvers: IResolvers = {

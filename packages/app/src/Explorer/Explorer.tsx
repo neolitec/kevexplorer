@@ -33,7 +33,7 @@ export const Explorer: React.FC = () => {
     <Viewport>
       <Topbar />
       <CenteredContainer>
-        <PathInput path={data?.path ?? ''} onChange={onChange} />
+        <PathInput path={data?.path ?? ''} onChange={onChange} disabled={loading} />
         {loading && <Loading data-testid="loader" />}
       </CenteredContainer>
       {!loading && (

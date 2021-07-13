@@ -25,7 +25,7 @@ Just run:
 
 With Docker:
 
-    docker-compose up -d
+    docker-compose up
 
 In development mode:
 
@@ -76,10 +76,12 @@ More about the scanner:
 
 **Known issue**
 
-When the tree of files is too big, we hit a `JavaScript heap out of memory` error.
+**Memory:** when the tree of files is too big, we hit a `JavaScript heap out of memory` error.
 If you want run Node with more memory, you can set this environment variable:
 
     NODE_OPTION='--max-old-space-size=8192'
+
+**Symlinks loops:** sometimes 
 
 ### CLI
 
