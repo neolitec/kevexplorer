@@ -46,6 +46,11 @@ All tests can be run with:
     yarn test
 
 You can also get into a specific package and run the same command.
+
+For instance, run tests for the `cli` packages:
+
+    cd packages/cli
+    yarn test
     
 ## TODO
 

@@ -8,6 +8,10 @@ describe(getFolder, () => {
   it('should return the root when already at the root', () => {
     expect(getFolder('/')).toEqual('/');
   });
+
+  it('should return the root when at the first level', () => {
+    expect(getFolder('/app')).toEqual('/');
+  });
 });
 
 describe(prettySize, () => {

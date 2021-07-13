@@ -1,5 +1,6 @@
 export function getFolder(path: string) {
-  return path.replace(/\/[^/]+$/, '');
+  const parent = path.replace(/\/[^/]+$/, '');
+  return parent || '/';
 }
 
 export function prettySize(size: number) {
